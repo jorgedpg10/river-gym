@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block body %}
+  {% include "components/header.html" %}
+
+  <div class="relative h-screen bg-cover bg-center" style="background-image: url('media/home/barra.jpg');">
+    <div class="absolute top-6 right-4">
+      <a href="{% url "client_add" %}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+        <i class="fa fa-plus"></i>
+        <span>Cliente</span>
+      </a>
+    </div>
+
+    <div class="flex items-center justify-center h-full">
+      <div class="bg-white p-6 rounded-md shadow-md">
+        <div class="font-medium text-gray-800 text-xl py-3 text-center">¿Quién ha ingresado?</div>
+        <form action="{% url "entry_add" %}" method="POST">
+          {% csrf_token %}
+          <div class="mb-4">
+            <select id="cliente" name="client" class="mt-1 block w-full border rounded-md">
+              <option value="" selected disabled>Selecciona un cliente</option>
+              {% for client in clients %}
+                <option value="{{ client.id }}">{{ client.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <input type="checkbox" id="manual" name="manual" value="true" onclick="toggleHora()">
+            <label class="font-light" for="manual">Ingresar hora manualmente</label>
+          </div>
+
+          <div id="hora-section" class="mb-4 hidden">
+            <label for="hora" class="block text-sm font-medium text-gray-700">Fecha y Hora: </label>
+            <input type="datetime-local" id="hora" name="hora" class="mt-1 p-2 block w-full border rounded-md"
+             >
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              class="w-full py-2 px-4 bg-indigo-600 text-white font-medium rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
+              Marcar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script para manejar la visibilidad -->
+  <script>
+    function toggleHora() {
+      const checkbox = document.getElementById('manual');
+      const horaSection = document.getElementById('hora-section');
+
+      if (checkbox.checked) {
+        horaSection.classList.remove('hidden'); // Mostrar campo de hora
+      } else {
+        horaSection.classList.add('hidden'); // Ocultar campo de hora
+      }
+    }
+  </script>
+{% endblock body %}

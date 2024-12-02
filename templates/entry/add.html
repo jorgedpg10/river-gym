@@ -1,0 +1,20 @@
+<h1>Crear Entrada</h1>
+
+{% if error %}
+    <p class="text-danger">{{ error }}</p> 
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_client">Cliente:</label>
+        <select id="id_client" name="client" class="form-control">
+            <option value="" disabled selected>Selecciona un cliente</option>
+            {% for client in clients %}
+                <option value="{{ client.id }}">{{ client.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear Entrada</button>
+</form>

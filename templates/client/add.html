@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Cliente{% endblock title %}
+
+{% block body %}
+  {% include "components/header.html" %}
+
+<div class="max-w-4xl mx-auto mt-10 p-8 bg-white rounded-lg shadow-md">
+  <h1 class="text-2xl font-semibold text-gray-800 mb-6">Crear Cliente</h1>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <!-- Nombre -->
+    <div class="mb-4">
+      <label for="id_name" class="block text-sm font-medium text-gray-700">Nombre:</label>
+      <input 
+        type="text" 
+        id="id_name" 
+        name="name" 
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+        required
+      >
+      {% if form.name.errors %}
+      <div class="text-red-500 text-sm mt-1">
+        {{ form.name.errors.0 }}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Cédula -->
+    <div class="mb-4">
+      <label for="id_dni" class="block text-sm font-medium text-gray-700">Cédula:</label>
+      <input 
+        type="text" 
+        id="id_dni" 
+        name="dni" 
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+        required
+      >
+      {% if form.dni.errors %}
+      <div class="text-red-500 text-sm mt-1">
+        {{ form.dni.errors.0 }}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Celular -->
+    <div class="mb-4">
+      <label for="id_celphone" class="block text-sm font-medium text-gray-700">Celular:</label>
+      <input 
+        type="text" 
+        id="id_celphone" 
+        name="celphone" 
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+        required
+      >
+      {% if form.celphone.errors %}
+      <div class="text-red-500 text-sm mt-1">
+        {{ form.celphone.errors.0 }}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Dirección -->
+    <div class="mb-4">
+      <label for="id_celphone" class="block text-sm font-medium text-gray-700">Dirección:</label>
+      <input 
+        type="text" 
+        id="id_address" 
+        name="address" 
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+        required
+      >
+      {% if form.address.errors %}
+      <div class="text-red-500 text-sm mt-1">
+        {{ form.address.errors.0 }}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Observaciones -->
+    <div class="mb-4">
+      <label for="id_observation" class="block text-sm font-medium text-gray-700">Observaciones:</label>
+      <textarea 
+        id="id_observation" 
+        name="observation" 
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+      ></textarea>
+      {% if form.observation.errors %}
+      <div class="text-red-500 text-sm mt-1">
+        {{ form.observation.errors.0 }}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Imagen -->
+    <div class="mb-4">
+      <label for="id_image" class="block text-sm font-medium text-gray-700">Imagen:</label>
+      <input 
+        type="file" 
+        id="id_image" 
+        name="image" 
+        class="mt-1 block w-full text-gray-900 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+      >
+      {% if form.image.errors %}
+      <div class="text-red-500 text-sm mt-1">
+        {{ form.image.errors.0 }}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Membresía Activa -->
+    <div class="mb-4 flex items-center">
+      <input 
+        type="checkbox" 
+        id="id_active_membership" 
+        name="active_membership" 
+        class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+      >
+      <label for="id_active_membership" class="ml-2 block text-sm text-gray-700">Membresía Activa</label>
+      {% if form.active_membership.errors %}
+      <div class="text-red-500 text-sm mt-1">
+        {{ form.active_membership.errors.0 }}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Activo Hasta -->
+    <div class="mb-4">
+      <label for="id_active_until" class="block text-sm font-medium text-gray-700">Activo Hasta:</label>
+      <input 
+        type="date" 
+        id="id_active_until" 
+        name="active_until" 
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+      >
+      {% if form.active_until.errors %}
+      <div class="text-red-500 text-sm mt-1">
+        {{ form.active_until.errors.0 }}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Botón Crear -->
+    <button 
+      type="submit" 
+      class="w-full px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+    >
+      Crear
+    </button>
+  </form>
+</div>
+
+{% endblock body %}
