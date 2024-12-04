@@ -1,16 +1,20 @@
 from .base import *
+import os
 
 DEBUG = False
 
 ALLOWED_HOSTS = []
 
+SECRET_KEY = os.getenv('SECRET_KEY')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '',
-        'HOST': 'localhost',
-        'USER': 'postgres',
-        'PASSWORD': '',
+        'NAME': os.getenv('DB_NAME'),
+        'HOST': os.getenv('DB_HOST'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
